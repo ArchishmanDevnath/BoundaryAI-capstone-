@@ -1,0 +1,3 @@
+batch_size: 50
+source: data/sample.csv
+warehouse_token: {{CANARY:pipeline_token}}

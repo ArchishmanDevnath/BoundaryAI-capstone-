@@ -1,0 +1,170 @@
+{
+  "attacker_cases_dh.jsonl": {
+    "attack_types": {
+      "Data Security Harm": 11,
+      "Financial Harm": 9,
+      "Physical Harm": 10
+    },
+    "fields": [
+      "Attack Type",
+      "Attacker Instruction",
+      "Attacker Tools",
+      "Expected Achievements",
+      "Modifed"
+    ],
+    "modified_flag": {
+      "0": 19,
+      "1": 11
+    },
+    "records": 30,
+    "tools_missing_from_catalog": [],
+    "tools_per_case": {
+      "1": 30
+    },
+    "tools_without_simulated_response": [
+      "AugustSmartLockGrantGuestAccess",
+      "AugustSmartLockUnlockDoor",
+      "BankManagerPayBill",
+      "BankManagerTransferFunds",
+      "BinanceDeposit",
+      "BinancePlaceOrder",
+      "BinanceWithdraw",
+      "CiscoUmbrellaCreatePolicy",
+      "CiscoUmbrellaUpdatePolicy",
+      "DropboxMoveItem",
+      "EmergencyDispatchSystemCreateDispatchRequest",
+      "EpicFHIRManageAppointments",
+      "EpicFHIRManageClinicalDocuments",
+      "EpicFHIRManagePatientRecords",
+      "EvernoteManagerManageNoteSharingLevel",
+      "FacebookManagerUpdateUserProfile",
+      "FedExShipManagerManageShipment",
+      "GitHubDeleteRepository",
+      "GoogleHomeScheduleDeviceAction",
+      "IndoorRobotGoToRoom",
+      "NortonIdentitySafeAutoFillPersonalInfo",
+      "NortonIdentitySafeDisableTwoFactorAuthentication",
+      "NortonIdentitySafeSharePassword",
+      "SlackLeaveChannel",
+      "TerminalExecute",
+      "The23andMeShareData",
+      "The23andMeUpdateData",
+      "TrafficControlGivePriorityToEmergencyVehicle",
+      "TrafficControlManageTrafficLightState",
+      "VenmoWithdrawMoney"
+    ]
+  },
+  "attacker_cases_ds.jsonl": {
+    "attack_types": {
+      "Financial Data": 6,
+      "Others": 15,
+      "Physical Data": 11
+    },
+    "fields": [
+      "Attack Type",
+      "Attacker Instruction",
+      "Attacker Tools",
+      "Expected Achievements",
+      "Modifed"
+    ],
+    "modified_flag": {
+      "0": 23,
+      "1": 9
+    },
+    "records": 32,
+    "tools_missing_from_catalog": [],
+    "tools_per_case": {
+      "2": 32
+    },
+    "tools_without_simulated_response": [
+      "GmailSendEmail"
+    ]
+  },
+  "attacker_simulated_responses.json": {
+    "keys": 2347,
+    "tools_covered": 32,
+    "type": "object keyed '(tool,arguments)'"
+  },
+  "observations": [
+    "Each test file is the full cross product of user cases and attacker cases, so its records are not independent.",
+    "A base and an enhanced record differ only in the injection wrapper text added to the tool response.",
+    "Test cases name attacker tools but give no arguments for them, so the adapted calls have empty parameters.",
+    "The data defines no allow or deny labels. Any authorization label is an interpretation, set out in the adaptation policy.",
+    "The field name 'Modifed' is misspelled in the source and is preserved as is."
+  ],
+  "test_cases_dh_base.json": {
+    "distinct_attacker_instructions": 30,
+    "distinct_user_instructions": 17,
+    "empty_values": 0,
+    "exact_duplicates": 0,
+    "injection_present_in_response": 510,
+    "records": 510,
+    "unexpected_or_missing_fields": [],
+    "unparseable_parameters": 0
+  },
+  "test_cases_dh_enhanced.json": {
+    "distinct_attacker_instructions": 30,
+    "distinct_user_instructions": 17,
+    "empty_values": 0,
+    "exact_duplicates": 0,
+    "injection_present_in_response": 510,
+    "records": 510,
+    "unexpected_or_missing_fields": [],
+    "unparseable_parameters": 0
+  },
+  "test_cases_ds_base.json": {
+    "distinct_attacker_instructions": 32,
+    "distinct_user_instructions": 17,
+    "empty_values": 0,
+    "exact_duplicates": 0,
+    "injection_present_in_response": 544,
+    "records": 544,
+    "unexpected_or_missing_fields": [],
+    "unparseable_parameters": 0
+  },
+  "test_cases_ds_enhanced.json": {
+    "distinct_attacker_instructions": 32,
+    "distinct_user_instructions": 17,
+    "empty_values": 0,
+    "exact_duplicates": 0,
+    "injection_present_in_response": 544,
+    "records": 544,
+    "unexpected_or_missing_fields": [],
+    "unparseable_parameters": 0
+  },
+  "tools.json": {
+    "effect_classes": {
+      "outbound": 30,
+      "read": 152,
+      "write": 148
+    },
+    "fields": [
+      "category",
+      "description_for_human",
+      "description_for_model",
+      "name_for_human",
+      "name_for_model",
+      "toolkit",
+      "tools"
+    ],
+    "toolkits": 38,
+    "tools": 330,
+    "type": "list of toolkits"
+  },
+  "user_cases.jsonl": {
+    "fields": [
+      "Level",
+      "Thought",
+      "Tool Parameters",
+      "Tool Response Template",
+      "User Instruction",
+      "User Tool"
+    ],
+    "levels": {
+      "High": 12,
+      "Low": 5
+    },
+    "records": 17,
+    "tools_missing_from_catalog": []
+  }
+}

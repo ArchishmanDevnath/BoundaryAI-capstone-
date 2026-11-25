@@ -1,0 +1,14 @@
+# Line endings are pinned so a clone is byte-identical on every OS.
+# Datasets, InjecAgent sources, model bundles and scenario files are verified by SHA-256 (manifests, the model
+# integrity check and experiment hashes). Git for Windows converts LF to CRLF by default, which would change those
+# bytes and make the checks fail on a fresh clone.
+* text=auto eol=lf
+
+# Never convert these: their exact bytes are hashed.
+data/** -text
+backend/models/** -text
+backend/models_posthoc/** -text
+
+*.joblib binary
+*.png binary
+*.ico binary

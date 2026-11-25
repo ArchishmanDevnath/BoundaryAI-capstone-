@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+.coverage
+htmlcov/
+# Runtime state (databases, run sandboxes and reports are reproducible)
+backend/var/
+*.sqlite3
+*.sqlite3-*
+# Node
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+# Secrets: local settings never leave the machine. The example file is the template.
+.env
+.env.*
+!.env.example
+# Benchmark fixtures contain dummy credentials only and must stay tracked
+!backend/benchmark/fixtures/**/.env
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.e2e-output/
+# Logs
+*.log
+npm-debug.log*
+.idea/
+# Duplicate copies of the InjecAgent files that sit directly in data/. They are byte-identical to
+# data/external/injecagent/ (the copy every script reads), so publishing them would only store the dataset twice.
+/data/*.json
+/data/*.jsonl

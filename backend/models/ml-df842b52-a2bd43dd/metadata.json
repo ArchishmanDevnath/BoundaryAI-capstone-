@@ -1,0 +1,1534 @@
+{
+  "artifacts": {
+    "stateful_hybrid.joblib": "82470ad757ae605c90433fc81016b8c10e1964e9e64a339c3716d1dc20a846f9",
+    "stateful_structured.joblib": "392994f8547b1b1df97cd245c7eb2af1cf62f03f50b9e15f03d16d8065447872",
+    "stateful_text.joblib": "8a6daaebd1b417c68862a7ff6886d4860b901da95ccdc5a031f78bff9ca93c6a",
+    "stateless_hybrid.joblib": "89ded94ece8378d66b67c706c5ade77be1c836b5fb2b69a48473b3edb2602642",
+    "stateless_structured.joblib": "83f79aebfd607f205fd1cd081b3ea830fffb74c4740bc02b0879428afd0acd9d",
+    "stateless_text.joblib": "d1893f13da83831e1ad28b03c6f12538843a2f07f33bcc54701e0a93e4c40a4b"
+  },
+  "bundle_sha256": "0b4ace1962222436e7c7dcd4fdd086735a226cc1faddd983749ed2a6078b720b",
+  "config": {
+    "block_max_fpr": 0.01,
+    "bootstrap_resamples": 1000,
+    "cv_folds": 5,
+    "cv_groups": "family",
+    "feature_set_version": 2,
+    "features": {
+      "stateful": [
+        "access_read",
+        "access_write",
+        "access_network",
+        "access_exec",
+        "access_app_read",
+        "access_app_write",
+        "access_app_outbound",
+        "is_delete",
+        "is_outbound",
+        "target_sensitive",
+        "target_sensitive_in_scope",
+        "target_operational",
+        "target_infra",
+        "target_test",
+        "relevant_to_task",
+        "target_task_overlap",
+        "host_named_in_task",
+        "task_mentions_network",
+        "task_mentions_delete",
+        "out_of_scope_sensitive",
+        "out_of_scope_change",
+        "payload_risky_code",
+        "payload_test_weakening",
+        "payload_secret",
+        "payload_log_length",
+        "policy_needs_approval",
+        "prior_denials",
+        "recent_denials",
+        "same_action_runs",
+        "same_action_denials",
+        "signal_sensitive_data_flow",
+        "signal_data_flow",
+        "signal_retry_variant",
+        "signal_tainted_context",
+        "signal_repeat_unnecessary",
+        "signal_denial_burst",
+        "signal_scope_drift",
+        "signal_weight_total",
+        "signal_hard",
+        "untrusted_has_injection",
+        "target_in_untrusted",
+        "action_words_only_in_untrusted"
+      ],
+      "stateless": [
+        "access_read",
+        "access_write",
+        "access_network",
+        "access_exec",
+        "access_app_read",
+        "access_app_write",
+        "access_app_outbound",
+        "is_delete",
+        "is_outbound",
+        "target_sensitive",
+        "target_sensitive_in_scope",
+        "target_operational",
+        "target_infra",
+        "target_test",
+        "relevant_to_task",
+        "target_task_overlap",
+        "host_named_in_task",
+        "task_mentions_network",
+        "task_mentions_delete",
+        "out_of_scope_sensitive",
+        "out_of_scope_change",
+        "payload_risky_code",
+        "payload_test_weakening",
+        "payload_secret",
+        "payload_log_length",
+        "policy_needs_approval"
+      ]
+    },
+    "gradient_boosting_grid": {
+      "learning_rate": [
+        0.05,
+        0.1
+      ],
+      "max_depth": [
+        2,
+        3
+      ],
+      "n_estimators": [
+        100,
+        200
+      ]
+    },
+    "random_forest_grid": {
+      "class_weight": [
+        "balanced"
+      ],
+      "max_depth": [
+        8,
+        null
+      ],
+      "min_samples_leaf": [
+        1,
+        5
+      ],
+      "n_estimators": [
+        200
+      ]
+    },
+    "review_max_fpr": 0.05,
+    "seed": 42,
+    "selection_metric": "average_precision",
+    "text_grid": {
+      "clf__C": [
+        0.1,
+        1.0,
+        10.0
+      ],
+      "clf__class_weight": [
+        null,
+        "balanced"
+      ]
+    },
+    "tfidf": {
+      "lowercase": true,
+      "max_features": 20000,
+      "min_df": 2,
+      "ngram_range": [
+        1,
+        2
+      ],
+      "sublinear_tf": true
+    },
+    "threshold_rule": "lowest threshold with validation false-positive rate within the ceiling"
+  },
+  "config_sha256": "a2bd43dd2a0a002ce8caea929d713dd0e75fca3bed3adecf94b24dd2383b53bc",
+  "data": {
+    "train": {
+      "families": 26,
+      "legitimate": 3347,
+      "projects": [
+        "bookings",
+        "fleet",
+        "inventory",
+        "invoicing",
+        "library",
+        "newsletter",
+        "scheduler",
+        "telemetry"
+      ],
+      "records": 5096,
+      "unauthorized": 1749
+    },
+    "validation": {
+      "families": 11,
+      "legitimate": 262,
+      "projects": [
+        "auction",
+        "clinic",
+        "survey"
+      ],
+      "records": 403,
+      "unauthorized": 141
+    }
+  },
+  "dataset_sha256": "df842b52811b2b5cd8dbdb3449b9d28159dc01b4001722fee6cd7890bf24a86e",
+  "interpretation": "Labels come from explicit rules over generated templates, so native test scores show how well the rules were learned on unseen projects, tasks and behaviours. End-to-end benchmark results are the evidence about runtime security.",
+  "library_versions": {
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1"
+  },
+  "profiles": {
+    "stateful": {
+      "calibration_comparison": {
+        "decision": "The stacked logistic regression is the calibration layer, and fits on out-of-fold scores. Components are not separately rescaled.",
+        "hybrid_validation_ece": 0.12440037010994728,
+        "structured": {
+          "brier_sigmoid": 0.029130418358337264,
+          "brier_uncalibrated": 0.019907903964932114,
+          "ece_sigmoid": 0.08800876630941434,
+          "ece_uncalibrated": 0.05943758757800717
+        },
+        "text": {
+          "brier_sigmoid": 0.2143814432119686,
+          "brier_uncalibrated": 0.22332627620113774,
+          "ece_sigmoid": 0.19061226168495446,
+          "ece_uncalibrated": 0.20864891133539665
+        }
+      },
+      "component_thresholds": {
+        "heuristic": 0.4,
+        "hybrid": 0.916744,
+        "structured": 0.395941,
+        "text": 0.969562
+      },
+      "feature_names": [
+        "access_read",
+        "access_write",
+        "access_network",
+        "access_exec",
+        "access_app_read",
+        "access_app_write",
+        "access_app_outbound",
+        "is_delete",
+        "is_outbound",
+        "target_sensitive",
+        "target_sensitive_in_scope",
+        "target_operational",
+        "target_infra",
+        "target_test",
+        "relevant_to_task",
+        "target_task_overlap",
+        "host_named_in_task",
+        "task_mentions_network",
+        "task_mentions_delete",
+        "out_of_scope_sensitive",
+        "out_of_scope_change",
+        "payload_risky_code",
+        "payload_test_weakening",
+        "payload_secret",
+        "payload_log_length",
+        "policy_needs_approval",
+        "prior_denials",
+        "recent_denials",
+        "same_action_runs",
+        "same_action_denials",
+        "signal_sensitive_data_flow",
+        "signal_data_flow",
+        "signal_retry_variant",
+        "signal_tainted_context",
+        "signal_repeat_unnecessary",
+        "signal_denial_burst",
+        "signal_scope_drift",
+        "signal_weight_total",
+        "signal_hard",
+        "untrusted_has_injection",
+        "target_in_untrusted",
+        "action_words_only_in_untrusted"
+      ],
+      "hybrid_coefficients": {
+        "hard_signal": 0.0484212569664123,
+        "heuristic_score": 7.859464908008718,
+        "history_signal_weight": -3.9445262867588196,
+        "logit_structured": 0.6749011812237583,
+        "logit_text": 0.6819360165770084
+      },
+      "hybrid_intercept": 0.2686971348876335,
+      "structured_candidates": {
+        "gradient_boosting": {
+          "best_params": {
+            "learning_rate": 0.05,
+            "max_depth": 3,
+            "n_estimators": 200
+          },
+          "cv_pr_auc": 0.9783520365435567,
+          "validation_pr_auc": 0.9944455222861741
+        },
+        "random_forest": {
+          "best_params": {
+            "class_weight": "balanced",
+            "max_depth": null,
+            "min_samples_leaf": 5,
+            "n_estimators": 200
+          },
+          "cv_pr_auc": 0.9716750388508318,
+          "validation_pr_auc": 0.9995567375886525
+        }
+      },
+      "structured_importances": {
+        "access_app_outbound": 0.0,
+        "access_app_read": 0.0,
+        "access_app_write": 0.0,
+        "access_exec": 0.0,
+        "access_network": 0.013989215871078719,
+        "access_read": 0.02645230333686735,
+        "access_write": 0.01995046343506582,
+        "action_words_only_in_untrusted": 0.1306003302617534,
+        "host_named_in_task": 0.0013375826208166764,
+        "is_delete": 0.004950018267218944,
+        "is_outbound": 0.03108642974955518,
+        "out_of_scope_change": 0.10529227433183945,
+        "out_of_scope_sensitive": 0.0771759073667835,
+        "payload_log_length": 0.03838868529330854,
+        "payload_risky_code": 0.031582070885659654,
+        "payload_secret": 0.004451307662299458,
+        "payload_test_weakening": 0.02526205278805574,
+        "policy_needs_approval": 0.0,
+        "prior_denials": 0.0086242873669823,
+        "recent_denials": 0.007824399969880916,
+        "relevant_to_task": 0.11944400856192074,
+        "same_action_denials": 0.001558347812766403,
+        "same_action_runs": 0.026254318050567372,
+        "signal_data_flow": 0.0,
+        "signal_denial_burst": 0.005663875074206563,
+        "signal_hard": 0.0001086425617299456,
+        "signal_repeat_unnecessary": 0.0031893709513548087,
+        "signal_retry_variant": 0.015496654343802747,
+        "signal_scope_drift": 0.0,
+        "signal_sensitive_data_flow": 0.0039556688732855635,
+        "signal_tainted_context": 0.008434325813466715,
+        "signal_weight_total": 0.04667158960614045,
+        "target_in_untrusted": 0.03238600735602707,
+        "target_infra": 0.0012027527809547,
+        "target_operational": 0.0035987907252229365,
+        "target_sensitive": 0.052611483256741184,
+        "target_sensitive_in_scope": 0.002024561341782807,
+        "target_task_overlap": 0.10008143875563119,
+        "target_test": 0.03566878768960709,
+        "task_mentions_delete": 0.002270899717075696,
+        "task_mentions_network": 0.003955099447855684,
+        "untrusted_has_injection": 0.00845604807269479
+      },
+      "structured_selected": "random_forest",
+      "text_best_params": {
+        "clf__C": 1.0,
+        "clf__class_weight": null
+      },
+      "text_columns": [
+        "task",
+        "action",
+        "untrusted"
+      ],
+      "text_cv_pr_auc": 0.8587918174904923,
+      "thresholds": {
+        "block": 0.970494,
+        "review": 0.916744,
+        "validation_fpr_at_block": 0.003816793893129771,
+        "validation_fpr_at_review": 0.04961832061068702,
+        "validation_recall_at_block": 0.9148936170212766,
+        "validation_recall_at_review": 0.9787234042553191
+      },
+      "validation": {
+        "heuristic": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.0,
+              0.146398097107906
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.9252135854341738,
+              1.0
+            ],
+            "recall_ci95": [
+              0.8909090909090909,
+              1.0
+            ]
+          },
+          "brier": 0.042952853598014894,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 12,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 12,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 78,
+              "legitimate": 90,
+              "legitimate_flagged": 0,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 12,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 9,
+              "legitimate": 12,
+              "legitimate_flagged": 0,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 12,
+              "legitimate": 28,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 12,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.0,
+              "n": 220,
+              "observed": 0.02727272727272727
+            },
+            {
+              "high": 0.30000000000000004,
+              "low": 0.2,
+              "mean_predicted": 0.25,
+              "n": 36,
+              "observed": 0.0
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.45,
+              "n": 24,
+              "observed": 0.5
+            },
+            {
+              "high": 0.8,
+              "low": 0.7000000000000001,
+              "mean_predicted": 0.75,
+              "n": 48,
+              "observed": 1.0
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 1.0,
+              "n": 75,
+              "observed": 1.0
+            }
+          ],
+          "confusion": {
+            "fn": 6,
+            "fp": 12,
+            "tn": 250,
+            "tp": 135
+          },
+          "ece": 0.06997518610421836,
+          "f1": 0.9375,
+          "false_negative_rate": 0.0425531914893617,
+          "false_positive_rate": 0.04580152671755725,
+          "n": 403,
+          "pr_auc": 0.9653876861446231,
+          "precision": 0.9183673469387755,
+          "recall": 0.9574468085106383,
+          "roc_auc": 0.9728764008445673,
+          "threshold": 0.4
+        },
+        "hybrid": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.0076314273368860725,
+              0.10606060606060606
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.984206794517336,
+              1.0
+            ],
+            "recall_ci95": [
+              0.9454545454545454,
+              1.0
+            ]
+          },
+          "brier": 0.10178792145890439,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 12,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 0,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 81,
+              "legitimate": 90,
+              "legitimate_flagged": 6,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 12,
+              "legitimate": 18,
+              "legitimate_flagged": 6,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 9,
+              "legitimate": 12,
+              "legitimate_flagged": 1,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 12,
+              "legitimate": 28,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 12,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.005981065458101243,
+              "n": 199,
+              "observed": 0.0
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.43127360396855163,
+              "n": 3,
+              "observed": 0.0
+            },
+            {
+              "high": 0.6000000000000001,
+              "low": 0.5,
+              "mean_predicted": 0.5805065350981223,
+              "n": 6,
+              "observed": 0.0
+            },
+            {
+              "high": 0.7000000000000001,
+              "low": 0.6000000000000001,
+              "mean_predicted": 0.632150579209035,
+              "n": 9,
+              "observed": 0.0
+            },
+            {
+              "high": 0.8,
+              "low": 0.7000000000000001,
+              "mean_predicted": 0.765979014210637,
+              "n": 9,
+              "observed": 0.0
+            },
+            {
+              "high": 0.9,
+              "low": 0.8,
+              "mean_predicted": 0.859975703414944,
+              "n": 18,
+              "observed": 0.16666666666666666
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 0.9880725037950074,
+              "n": 159,
+              "observed": 0.8679245283018868
+            }
+          ],
+          "confusion": {
+            "fn": 3,
+            "fp": 13,
+            "tn": 249,
+            "tp": 138
+          },
+          "ece": 0.12440037010994728,
+          "f1": 0.9452054794520548,
+          "false_negative_rate": 0.02127659574468085,
+          "false_positive_rate": 0.04961832061068702,
+          "n": 403,
+          "pr_auc": 0.994233777796375,
+          "precision": 0.9139072847682119,
+          "recall": 0.9787234042553191,
+          "roc_auc": 0.9965892480103946,
+          "threshold": 0.916744
+        },
+        "structured": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.011360444330949949,
+              0.08609840044564696
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.9982683982683983,
+              1.0
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "brier": 0.019907903964932114,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 12,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 0,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 84,
+              "legitimate": 90,
+              "legitimate_flagged": 6,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 12,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 9,
+              "legitimate": 12,
+              "legitimate_flagged": 3,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 12,
+              "legitimate": 28,
+              "legitimate_flagged": 3,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 12,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.021217297021228283,
+              "n": 199,
+              "observed": 0.0
+            },
+            {
+              "high": 0.2,
+              "low": 0.1,
+              "mean_predicted": 0.18634705592269837,
+              "n": 24,
+              "observed": 0.0
+            },
+            {
+              "high": 0.30000000000000004,
+              "low": 0.2,
+              "mean_predicted": 0.24088308046894713,
+              "n": 9,
+              "observed": 0.0
+            },
+            {
+              "high": 0.4,
+              "low": 0.30000000000000004,
+              "mean_predicted": 0.3469526650221807,
+              "n": 23,
+              "observed": 0.0
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.4336482351395813,
+              "n": 7,
+              "observed": 0.42857142857142855
+            },
+            {
+              "high": 0.6000000000000001,
+              "low": 0.5,
+              "mean_predicted": 0.5210586396540612,
+              "n": 6,
+              "observed": 0.5
+            },
+            {
+              "high": 0.8,
+              "low": 0.7000000000000001,
+              "mean_predicted": 0.7431167155247244,
+              "n": 3,
+              "observed": 1.0
+            },
+            {
+              "high": 0.9,
+              "low": 0.8,
+              "mean_predicted": 0.8579486947010581,
+              "n": 12,
+              "observed": 1.0
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 0.9793853139673129,
+              "n": 120,
+              "observed": 1.0
+            }
+          ],
+          "confusion": {
+            "fn": 0,
+            "fp": 12,
+            "tn": 250,
+            "tp": 141
+          },
+          "ece": 0.05943758757800717,
+          "f1": 0.9591836734693877,
+          "false_negative_rate": 0.0,
+          "false_positive_rate": 0.04580152671755725,
+          "n": 403,
+          "pr_auc": 0.9995567375886525,
+          "precision": 0.9215686274509803,
+          "recall": 1.0,
+          "roc_auc": 0.9997563748578853,
+          "threshold": 0.395941
+        },
+        "text": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.0,
+              0.07109851049424508
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.3175598966933931,
+              0.6258444730990276
+            ],
+            "recall_ci95": [
+              0.0,
+              0.10909090909090909
+            ]
+          },
+          "brier": 0.22332627620113774,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 0,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 3,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 6,
+              "legitimate": 90,
+              "legitimate_flagged": 3,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 0,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 0,
+              "legitimate": 12,
+              "legitimate_flagged": 3,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 0,
+              "legitimate": 28,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 0,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.01513900033656822,
+              "n": 232,
+              "observed": 0.14224137931034483
+            },
+            {
+              "high": 0.2,
+              "low": 0.1,
+              "mean_predicted": 0.11400056136768842,
+              "n": 3,
+              "observed": 1.0
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.4762709147748282,
+              "n": 2,
+              "observed": 1.0
+            },
+            {
+              "high": 0.6000000000000001,
+              "low": 0.5,
+              "mean_predicted": 0.5436214561743722,
+              "n": 1,
+              "observed": 1.0
+            },
+            {
+              "high": 0.7000000000000001,
+              "low": 0.6000000000000001,
+              "mean_predicted": 0.6652412752113721,
+              "n": 15,
+              "observed": 0.9333333333333333
+            },
+            {
+              "high": 0.8,
+              "low": 0.7000000000000001,
+              "mean_predicted": 0.7687872225344374,
+              "n": 17,
+              "observed": 0.7647058823529411
+            },
+            {
+              "high": 0.9,
+              "low": 0.8,
+              "mean_predicted": 0.8517626122457047,
+              "n": 48,
+              "observed": 0.7291666666666666
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 0.9465947679219656,
+              "n": 85,
+              "observed": 0.47058823529411764
+            }
+          ],
+          "confusion": {
+            "fn": 135,
+            "fp": 9,
+            "tn": 253,
+            "tp": 6
+          },
+          "ece": 0.20864891133539665,
+          "f1": 0.07692307692307693,
+          "false_negative_rate": 0.9574468085106383,
+          "false_positive_rate": 0.03435114503816794,
+          "n": 403,
+          "pr_auc": 0.508836688188557,
+          "precision": 0.4,
+          "recall": 0.0425531914893617,
+          "roc_auc": 0.7579313518488441,
+          "threshold": 0.969562
+        }
+      }
+    },
+    "stateless": {
+      "calibration_comparison": {
+        "decision": "The stacked logistic regression is the calibration layer, and fits on out-of-fold scores. Components are not separately rescaled.",
+        "hybrid_validation_ece": 0.11332962091447915,
+        "structured": {
+          "brier_sigmoid": 0.033422977671516384,
+          "brier_uncalibrated": 0.03690201855786617,
+          "ece_sigmoid": 0.0910649361665189,
+          "ece_uncalibrated": 0.0848218920567083
+        },
+        "text": {
+          "brier_sigmoid": 0.2078016432291336,
+          "brier_uncalibrated": 0.21567666387048012,
+          "ece_sigmoid": 0.23976950833405297,
+          "ece_uncalibrated": 0.20987542607540413
+        }
+      },
+      "component_thresholds": {
+        "heuristic": 0.4,
+        "hybrid": 0.905152,
+        "structured": 0.835,
+        "text": 0.984346
+      },
+      "feature_names": [
+        "access_read",
+        "access_write",
+        "access_network",
+        "access_exec",
+        "access_app_read",
+        "access_app_write",
+        "access_app_outbound",
+        "is_delete",
+        "is_outbound",
+        "target_sensitive",
+        "target_sensitive_in_scope",
+        "target_operational",
+        "target_infra",
+        "target_test",
+        "relevant_to_task",
+        "target_task_overlap",
+        "host_named_in_task",
+        "task_mentions_network",
+        "task_mentions_delete",
+        "out_of_scope_sensitive",
+        "out_of_scope_change",
+        "payload_risky_code",
+        "payload_test_weakening",
+        "payload_secret",
+        "payload_log_length",
+        "policy_needs_approval"
+      ],
+      "hybrid_coefficients": {
+        "hard_signal": 0.0,
+        "heuristic_score": 8.37106465404245,
+        "history_signal_weight": 0.0,
+        "logit_structured": 0.4258721251999949,
+        "logit_text": 0.8353968568977423
+      },
+      "hybrid_intercept": 0.25592324991538284,
+      "structured_candidates": {
+        "gradient_boosting": {
+          "best_params": {
+            "learning_rate": 0.1,
+            "max_depth": 3,
+            "n_estimators": 200
+          },
+          "cv_pr_auc": 0.9451629577623045,
+          "validation_pr_auc": 0.9878348634768297
+        },
+        "random_forest": {
+          "best_params": {
+            "class_weight": "balanced",
+            "max_depth": null,
+            "min_samples_leaf": 1,
+            "n_estimators": 200
+          },
+          "cv_pr_auc": 0.9191331536887442,
+          "validation_pr_auc": 0.9918428509761292
+        }
+      },
+      "structured_importances": {
+        "access_app_outbound": 0.0,
+        "access_app_read": 0.0,
+        "access_app_write": 0.0,
+        "access_exec": 0.0,
+        "access_network": 0.02047942010938721,
+        "access_read": 0.025864841931187776,
+        "access_write": 0.02473097451223147,
+        "host_named_in_task": 0.0025057011345148332,
+        "is_delete": 0.0072223380402664005,
+        "is_outbound": 0.039752023635432454,
+        "out_of_scope_change": 0.11758130630874283,
+        "out_of_scope_sensitive": 0.07953080475405296,
+        "payload_log_length": 0.06209405176124548,
+        "payload_risky_code": 0.04260192033912895,
+        "payload_secret": 0.013538093400636745,
+        "payload_test_weakening": 0.029022372490992324,
+        "policy_needs_approval": 0.0,
+        "relevant_to_task": 0.18332083544208114,
+        "target_infra": 0.012238753551186372,
+        "target_operational": 0.005028146440562595,
+        "target_sensitive": 0.052307789570493694,
+        "target_sensitive_in_scope": 0.003479436988334714,
+        "target_task_overlap": 0.1623389533596798,
+        "target_test": 0.10301367888774825,
+        "task_mentions_delete": 0.005738230085457984,
+        "task_mentions_network": 0.007610327256635994
+      },
+      "structured_selected": "random_forest",
+      "text_best_params": {
+        "clf__C": 1.0,
+        "clf__class_weight": null
+      },
+      "text_columns": [
+        "task",
+        "action"
+      ],
+      "text_cv_pr_auc": 0.8544081016693253,
+      "thresholds": {
+        "block": 0.968015,
+        "review": 0.905152,
+        "validation_fpr_at_block": 0.0,
+        "validation_fpr_at_review": 0.03816793893129771,
+        "validation_recall_at_block": 1.0,
+        "validation_recall_at_review": 1.0
+      },
+      "validation": {
+        "heuristic": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.0,
+              0.0
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.92891300624097,
+              1.0
+            ],
+            "recall_ci95": [
+              0.8909090909090909,
+              1.0
+            ]
+          },
+          "brier": 0.04872208436724565,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 12,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 0,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 78,
+              "legitimate": 90,
+              "legitimate_flagged": 0,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 12,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 9,
+              "legitimate": 12,
+              "legitimate_flagged": 0,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 12,
+              "legitimate": 28,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 12,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.0,
+              "n": 268,
+              "observed": 0.022388059701492536
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.45,
+              "n": 24,
+              "observed": 1.0
+            },
+            {
+              "high": 0.8,
+              "low": 0.7000000000000001,
+              "mean_predicted": 0.75,
+              "n": 102,
+              "observed": 1.0
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 1.0,
+              "n": 9,
+              "observed": 1.0
+            }
+          ],
+          "confusion": {
+            "fn": 6,
+            "fp": 0,
+            "tn": 262,
+            "tp": 135
+          },
+          "ece": 0.1109181141439206,
+          "f1": 0.9782608695652174,
+          "false_negative_rate": 0.0425531914893617,
+          "false_positive_rate": 0.0,
+          "n": 403,
+          "pr_auc": 0.972335145979621,
+          "precision": 1.0,
+          "recall": 0.9574468085106383,
+          "roc_auc": 0.9787234042553192,
+          "threshold": 0.4
+        },
+        "hybrid": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.017527204086164778,
+              0.05714285714285714
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.9999999999999998,
+              1.0000000000000002
+            ],
+            "recall_ci95": [
+              1.0,
+              1.0
+            ]
+          },
+          "brier": 0.06015040248461313,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 12,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 2,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 84,
+              "legitimate": 90,
+              "legitimate_flagged": 6,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 12,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 9,
+              "legitimate": 12,
+              "legitimate_flagged": 0,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 12,
+              "legitimate": 28,
+              "legitimate_flagged": 2,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 12,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.0426481693364306,
+              "n": 187,
+              "observed": 0.0
+            },
+            {
+              "high": 0.2,
+              "low": 0.1,
+              "mean_predicted": 0.1490728141011158,
+              "n": 12,
+              "observed": 0.0
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.4484614268602614,
+              "n": 45,
+              "observed": 0.0
+            },
+            {
+              "high": 0.9,
+              "low": 0.8,
+              "mean_predicted": 0.8156930509279602,
+              "n": 3,
+              "observed": 0.0
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 0.9889737976404714,
+              "n": 156,
+              "observed": 0.9038461538461539
+            }
+          ],
+          "confusion": {
+            "fn": 0,
+            "fp": 10,
+            "tn": 252,
+            "tp": 141
+          },
+          "ece": 0.11332962091447915,
+          "f1": 0.9657534246575342,
+          "false_negative_rate": 0.0,
+          "false_positive_rate": 0.03816793893129771,
+          "n": 403,
+          "pr_auc": 1.0,
+          "precision": 0.9337748344370861,
+          "recall": 1.0,
+          "roc_auc": 1.0,
+          "threshold": 0.905152
+        },
+        "structured": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.0,
+              0.0
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.9693473005073799,
+              1.0
+            ],
+            "recall_ci95": [
+              0.8909090909090909,
+              1.0
+            ]
+          },
+          "brier": 0.03690201855786617,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 12,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 0,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 78,
+              "legitimate": 90,
+              "legitimate_flagged": 0,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 12,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 9,
+              "legitimate": 12,
+              "legitimate_flagged": 0,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 12,
+              "legitimate": 28,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 12,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.03033429187634795,
+              "n": 214,
+              "observed": 0.0
+            },
+            {
+              "high": 0.30000000000000004,
+              "low": 0.2,
+              "mean_predicted": 0.23,
+              "n": 15,
+              "observed": 0.0
+            },
+            {
+              "high": 0.4,
+              "low": 0.30000000000000004,
+              "mean_predicted": 0.38,
+              "n": 2,
+              "observed": 1.0
+            },
+            {
+              "high": 0.5,
+              "low": 0.4,
+              "mean_predicted": 0.455,
+              "n": 4,
+              "observed": 1.0
+            },
+            {
+              "high": 0.6000000000000001,
+              "low": 0.5,
+              "mean_predicted": 0.591755272216941,
+              "n": 33,
+              "observed": 0.0
+            },
+            {
+              "high": 0.9,
+              "low": 0.8,
+              "mean_predicted": 0.835,
+              "n": 3,
+              "observed": 1.0
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 0.9939487874685157,
+              "n": 132,
+              "observed": 1.0
+            }
+          ],
+          "confusion": {
+            "fn": 6,
+            "fp": 0,
+            "tn": 262,
+            "tp": 135
+          },
+          "ece": 0.0848218920567083,
+          "f1": 0.9782608695652174,
+          "false_negative_rate": 0.0425531914893617,
+          "false_positive_rate": 0.0,
+          "n": 403,
+          "pr_auc": 0.9918428509761292,
+          "precision": 1.0,
+          "recall": 0.9574468085106383,
+          "roc_auc": 0.9946402468734774,
+          "threshold": 0.835
+        },
+        "text": {
+          "bootstrap_by_family": {
+            "false_positive_rate_ci95": [
+              0.0,
+              0.0
+            ],
+            "groups": 11,
+            "pr_auc_ci95": [
+              0.34517764367657,
+              0.7422800093642797
+            ],
+            "recall_ci95": [
+              0.0,
+              0.27277183600713006
+            ]
+          },
+          "brier": 0.21567666387048012,
+          "by_category": {
+            "bad_content": {
+              "actions": 18,
+              "caught": 0,
+              "legitimate": 6,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "benign": {
+              "actions": 99,
+              "caught": 0,
+              "legitimate": 99,
+              "legitimate_flagged": 0,
+              "unauthorized": 0
+            },
+            "prompt_injection": {
+              "actions": 174,
+              "caught": 12,
+              "legitimate": 90,
+              "legitimate_flagged": 0,
+              "unauthorized": 84
+            },
+            "repeated": {
+              "actions": 30,
+              "caught": 0,
+              "legitimate": 18,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_network": {
+              "actions": 21,
+              "caught": 0,
+              "legitimate": 12,
+              "legitimate_flagged": 0,
+              "unauthorized": 9
+            },
+            "scope_read": {
+              "actions": 40,
+              "caught": 0,
+              "legitimate": 28,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            },
+            "scope_write": {
+              "actions": 21,
+              "caught": 6,
+              "legitimate": 9,
+              "legitimate_flagged": 0,
+              "unauthorized": 12
+            }
+          },
+          "calibration_curve": [
+            {
+              "high": 0.1,
+              "low": 0.0,
+              "mean_predicted": 0.02273491245425357,
+              "n": 103,
+              "observed": 0.11650485436893204
+            },
+            {
+              "high": 0.2,
+              "low": 0.1,
+              "mean_predicted": 0.12075819685917184,
+              "n": 102,
+              "observed": 0.058823529411764705
+            },
+            {
+              "high": 0.30000000000000004,
+              "low": 0.2,
+              "mean_predicted": 0.2532626970040966,
+              "n": 24,
+              "observed": 0.5
+            },
+            {
+              "high": 0.4,
+              "low": 0.30000000000000004,
+              "mean_predicted": 0.3436561004269026,
+              "n": 6,
+              "observed": 1.0
+            },
+            {
+              "high": 0.9,
+              "low": 0.8,
+              "mean_predicted": 0.8830849557862805,
+              "n": 3,
+              "observed": 1.0
+            },
+            {
+              "high": 1.0,
+              "low": 0.9,
+              "mean_predicted": 0.9720827443003578,
+              "n": 165,
+              "observed": 0.6181818181818182
+            }
+          ],
+          "confusion": {
+            "fn": 123,
+            "fp": 0,
+            "tn": 262,
+            "tp": 18
+          },
+          "ece": 0.20987542607540413,
+          "f1": 0.22641509433962265,
+          "false_negative_rate": 0.8723404255319149,
+          "false_positive_rate": 0.0,
+          "n": 403,
+          "pr_auc": 0.6012586190195477,
+          "precision": 1.0,
+          "recall": 0.1276595744680851,
+          "roc_auc": 0.7752016674787505,
+          "threshold": 0.984346
+        }
+      }
+    }
+  },
+  "test_access": null,
+  "test_evaluated": false,
+  "trained_at": "2026-11-06T08:22:34+00:00",
+  "version": "ml-df842b52-a2bd43dd"
+}

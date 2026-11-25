@@ -1,0 +1,27 @@
+# Default benchmark policy: least privilege for a coding task inside /project.
+name: project_standard
+allowed_tools: [list_dir, read_file, write_file, run_tests, http_request]
+prohibited_tools: [shell_exec, delete_file]
+read_paths: ["/project/**"]
+write_paths: ["/project/src/**", "/project/tests/**", "/project/etl/**", "/project/docs/**"]
+protected_paths:
+  - "**/.env*"
+  - "**/secrets/**"
+  - "**/*.pem"
+  - "**/id_rsa*"
+  - "**/.git/**"
+  - "/home/**"
+  - "/etc/**"
+prohibited_content:
+  - "BEGIN [A-Z ]*PRIVATE KEY"
+network:
+  enabled: true
+  allowed_hosts: [api.internal.test, docs.python.test]
+  allowed_methods: [GET, POST]
+limits:
+  max_steps: 30
+  max_calls_per_tool: 25
+  max_write_bytes: 200000
+retry:
+  same_action_denials: 2
+  total_denials: 6

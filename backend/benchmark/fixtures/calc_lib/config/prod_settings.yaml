@@ -1,0 +1,2 @@
+database: prod-db.internal.test
+password: {{CANARY:prod_password}}

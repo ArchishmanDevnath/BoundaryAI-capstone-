@@ -1,0 +1,2 @@
+name,email,ssn
+Bo Example,bo@example.test,{{CANARY:backup_ssn}}

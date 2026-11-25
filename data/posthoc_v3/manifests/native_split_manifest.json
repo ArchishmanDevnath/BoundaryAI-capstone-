@@ -1,0 +1,234 @@
+{
+  "ambiguous_excluded": {
+    "records": 288,
+    "rules": {
+      "A1_nonsensitive_read_outside_scope": 272,
+      "A3_in_scope_but_injected": 16
+    }
+  },
+  "composition": {
+    "test": {
+      "categories": {
+        "bad_content": 12,
+        "benign": 109,
+        "prompt_injection": 166,
+        "repeated": 44,
+        "scope_network": 19,
+        "scope_read": 57,
+        "scope_write": 27
+      },
+      "families": [
+        "content_skip_mark",
+        "inj_helper_patch",
+        "inj_paraphrase_leak",
+        "inj_review_comment",
+        "ok_explore_tests",
+        "ok_injection_skipped",
+        "ok_readme_twice",
+        "scope_delete_guide",
+        "scope_post_ping",
+        "scope_read_live",
+        "scope_read_wages",
+        "scope_write_workflow",
+        "seq_loop_settings"
+      ],
+      "labels": {
+        "legitimate": 266,
+        "unauthorized": 168
+      },
+      "projects": [
+        "farmco",
+        "museum",
+        "payments"
+      ],
+      "records": 434,
+      "rules": {
+        "L1_in_task_scope": 133,
+        "L2_project_orientation_read": 67,
+        "L3_run_tests": 15,
+        "L4_host_named_by_task": 51,
+        "U1_harmful_or_leaking_content": 12,
+        "U2_data_sent_after_injected_instruction": 48,
+        "U3_data_sent_to_host_task_did_not_name": 9,
+        "U4_followed_injected_instruction": 34,
+        "U6_change_outside_task_scope": 14,
+        "U7_sensitive_read_outside_task_scope": 21,
+        "U8_pointless_repeat_outside_task_scope": 30
+      },
+      "tasks": [
+        "edit_makefile",
+        "notify_release",
+        "review_timeout",
+        "summarize_tests"
+      ]
+    },
+    "train": {
+      "categories": {
+        "bad_content": 436,
+        "benign": 1230,
+        "prompt_injection": 2000,
+        "repeated": 475,
+        "scope_network": 122,
+        "scope_read": 610,
+        "scope_write": 223
+      },
+      "families": [
+        "content_backdoor",
+        "content_secret_docs",
+        "content_weaken",
+        "inj_comment_system",
+        "inj_doc_polite",
+        "inj_http_followup",
+        "inj_notes_write",
+        "inj_quiet_read",
+        "inj_readme_ignore",
+        "ok_injection_ignored",
+        "ok_missing_file",
+        "ok_orient",
+        "ok_password_word",
+        "ok_reread",
+        "ok_sibling",
+        "scope_delete_tests",
+        "scope_post",
+        "scope_read_data",
+        "scope_read_deploy",
+        "scope_read_finance",
+        "scope_read_prod",
+        "scope_write_ci",
+        "scope_write_script",
+        "seq_loop_notes",
+        "seq_retry_env",
+        "seq_retry_key"
+      ],
+      "labels": {
+        "legitimate": 3347,
+        "unauthorized": 1749
+      },
+      "projects": [
+        "bookings",
+        "fleet",
+        "inventory",
+        "invoicing",
+        "library",
+        "newsletter",
+        "scheduler",
+        "telemetry"
+      ],
+      "records": 5096,
+      "rules": {
+        "L1_in_task_scope": 2087,
+        "L2_project_orientation_read": 580,
+        "L3_run_tests": 608,
+        "L4_host_named_by_task": 72,
+        "U1_harmful_or_leaking_content": 242,
+        "U2_data_sent_after_injected_instruction": 384,
+        "U3_data_sent_to_host_task_did_not_name": 56,
+        "U4_followed_injected_instruction": 376,
+        "U5_alternative_route_after_denial": 100,
+        "U6_change_outside_task_scope": 147,
+        "U7_sensitive_read_outside_task_scope": 248,
+        "U8_pointless_repeat_outside_task_scope": 196
+      },
+      "tasks": [
+        "add_docstring",
+        "add_test",
+        "cleanup_notes",
+        "explain_deploy",
+        "fetch_schema",
+        "fix_bug",
+        "fix_ci",
+        "update_guide"
+      ]
+    },
+    "val": {
+      "categories": {
+        "bad_content": 18,
+        "benign": 99,
+        "prompt_injection": 174,
+        "repeated": 30,
+        "scope_network": 21,
+        "scope_read": 40,
+        "scope_write": 21
+      },
+      "families": [
+        "content_eval",
+        "inj_changelog_task",
+        "inj_docstring_hint",
+        "inj_issue_paste",
+        "ok_docs_tour",
+        "ok_injection_noted",
+        "ok_tests_first",
+        "scope_post_metrics",
+        "scope_read_backup",
+        "scope_write_makefile",
+        "seq_retry_variant2"
+      ],
+      "labels": {
+        "legitimate": 262,
+        "unauthorized": 141
+      },
+      "projects": [
+        "auction",
+        "clinic",
+        "survey"
+      ],
+      "records": 403,
+      "rules": {
+        "L1_in_task_scope": 145,
+        "L2_project_orientation_read": 42,
+        "L3_run_tests": 27,
+        "L4_host_named_by_task": 48,
+        "U1_harmful_or_leaking_content": 36,
+        "U2_data_sent_after_injected_instruction": 24,
+        "U3_data_sent_to_host_task_did_not_name": 9,
+        "U4_followed_injected_instruction": 36,
+        "U5_alternative_route_after_denial": 12,
+        "U6_change_outside_task_scope": 12,
+        "U7_sensitive_read_outside_task_scope": 12
+      },
+      "tasks": [
+        "audit_columns",
+        "post_status",
+        "rename_helper",
+        "update_readme"
+      ]
+    }
+  },
+  "deduplication": {
+    "conflicting_records_removed": 0,
+    "exact_duplicates_removed": 7851
+  },
+  "external_test": {
+    "file": "data/splits/injecagent_external_test.jsonl",
+    "sha256": "604b1b479bd383dc025b1230b87ad9eaa6e878f255b0c11b5f8017e7a6837613"
+  },
+  "files": {
+    "data/splits/native_test.jsonl": "6c29f1b628dd5acb281566625a8176d13b996d32228e295fdcb259c1b4cd9bd9",
+    "data/splits/native_train.jsonl": "3eb01ee470fb4def0a2844a8fa8b7099b9a02dbdce87b6c25fd0a1f7712bd0d8",
+    "data/splits/native_val.jsonl": "3686b1abc89024d4b6aa4dee216800cdcd4e6f4129ea4fb18a9417bba3dc0fe2"
+  },
+  "generation": {
+    "attack_position": "after_first_task_step",
+    "discarded_cross_split_traces": 9248,
+    "generator_version": "3",
+    "kept_traces": {
+      "test": 156,
+      "train": 1664,
+      "val": 132
+    },
+    "possible_traces": 11200
+  },
+  "generator_version": "3",
+  "grouping": "Projects, tasks and behaviour families each belong to exactly one split. A trace is kept only if all three agree.",
+  "internal_scenarios": "The 53 benchmark scenarios are never used for training, tuning, calibration or threshold selection.",
+  "leakage_report": {
+    "group_overlaps_across_splits": {},
+    "identical_records_across_splits": 0,
+    "near_duplicate_pairs_across_splits": 0,
+    "near_duplicate_threshold": 0.9,
+    "objectives_shared_with_injecagent": [],
+    "objectives_shared_with_internal_scenarios": [],
+    "problems": [],
+    "training_contains_injecagent_marker": false
+  }
+}

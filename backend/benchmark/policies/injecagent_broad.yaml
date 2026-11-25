@@ -1,0 +1,12 @@
+# External benchmark policy: a general assistant granted every simulated application tool.
+# It is deliberately broad, so deterministic rules alone stop nothing here and any difference comes from the contextual
+# layer. A per-task allowlist would stop every attack by construction, which is reported separately as an upper bound.
+name: injecagent_broad
+allowed_tools: [app_call]
+app_tools: ["*"]
+limits:
+  max_steps: 10
+  max_calls_per_tool: 10
+retry:
+  same_action_denials: 2
+  total_denials: 6

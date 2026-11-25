@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b0e12;
+  --color-panel: #101418;
+  --color-raised: #161b21;
+  --color-line: #232a32;
+  --color-line-strong: #38414c;
+  --color-ink: #f0efec;
+  --color-ink-2: #c3c2b7;
+  --color-ink-3: #8d9196;
+  --color-accent: #7fb2e8;
+  --color-good: #0ca30c;
+  --color-warn: #fab219;
+  --color-serious: #ec835a;
+  --color-critical: #d03b3b;
+  --color-cfg-a: #3987e5;
+  --color-cfg-b: #d95926;
+  --color-cfg-rc: #199e70;
+  --color-cfg-c: #c98500;
+  --color-cfg-d: #d55181;
+  --color-cfg-e: #008300;
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Cascadia Mono", "SF Mono", Consolas, ui-monospace, monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+/* In the base layer, so that Tailwind utilities can override these element defaults. */
+@layer base {
+  input,
+  select,
+  textarea {
+    background: var(--color-bg);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--color-ink);
+    font-size: 13px;
+    width: 100%;
+  }
+
+  input[type="checkbox"] {
+    width: auto;
+    accent-color: var(--color-accent);
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  button:focus-visible,
+  a:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th {
+    text-align: left;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--color-line-strong);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--color-line);
+    vertical-align: top;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pulse-dot {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    50% {
+      opacity: 0.35;
+    }
+  }
+}
